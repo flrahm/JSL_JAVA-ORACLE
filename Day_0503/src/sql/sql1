@@ -1,0 +1,37 @@
+
+create table teacher(
+
+	tno number(4) constraint teacher_tno_pk primary key,
+	tname varchar2(10) not null,
+	tel varchar2(13),
+	part varchar2(10) not null,
+	birthday date not null,
+	regdate date default sysdate
+);
+
+select * from teacher;
+
+create table student(
+	
+	bun number(4) constraint student_bun_pk primary key,
+	name varchar2(10) not null,
+	tel varchar2(13),
+	birthday date not null,
+	tno number(4) constraint teacher_tno_fk references teacher,
+	regdate date default sysdate
+	
+);
+
+select * from student;
+
+create sequence teacher_tno_seq
+increment by 1 start with 1000;
+
+create sequence student_bun_seq
+increment by 1 start with 1000;
+
+insert into teacher
+values(teacher_tno_seq.nextval,'kim','010-5234-5234','eng','1984-09-24','1992/10/25');
+
+insert into student
+values(student_bun_seq.nextval,'±èÇĞ»ı','010-2203-3424','1998/03/23',1001,null);
